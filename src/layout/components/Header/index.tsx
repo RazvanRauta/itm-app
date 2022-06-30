@@ -11,6 +11,7 @@ const StyledLogo = styled('img')({
   position: 'absolute',
   top: 0,
   left: 0,
+  zIndex: 10,
 })
 
 export default memo(function Header() {

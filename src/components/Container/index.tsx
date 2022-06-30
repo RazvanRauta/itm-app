@@ -1,7 +1,7 @@
-import MUIContainer from '@mui/material/Container'
+import MUIContainer, { type ContainerProps } from '@mui/material/Container'
 import React from 'react'
 
-type Props = {
+interface Props extends ContainerProps {
   children?: React.ReactNode
 }
 
