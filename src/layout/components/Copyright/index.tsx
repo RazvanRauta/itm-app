@@ -4,7 +4,7 @@ import React, { memo } from 'react'
 
 const Copyright: React.FC = () => {
   return (
-    <Typography variant="body2" color="textSecondary">
+    <Typography variant="body2">
       {'Copyright © '}
       <Link color="inherit" href="https://rrazvan.dev" target="_blank">
         RRazvan
