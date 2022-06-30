@@ -1,5 +1,7 @@
+import { type Theme } from '@mui/material'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { styled } from '@mui/system'
 import { memo } from 'react'
 
@@ -15,6 +17,7 @@ const StyledLogo = styled('img')({
 })
 
 export default memo(function Header() {
+  const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'))
   return (
     <Box
       component="header"
@@ -27,62 +30,64 @@ export default memo(function Header() {
         position: 'relative',
       }}
     >
-      <Container>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'flex-start',
-            justifyContent: 'space-between',
-          }}
-        >
-          <Box
-            sx={{
-              position: 'relative',
-            }}
-          >
-            <StyledLogo src={Logo} alt="Logo" />
-          </Box>
+      {!matches && (
+        <Container>
           <Box
             sx={{
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'flex-start',
-              justifyContent: 'flex-end',
-              gap: '8px',
-              py: '8px',
+              justifyContent: 'space-between',
             }}
           >
-            <Button
-              variant="text"
+            <Box
               sx={{
-                textTransform: 'none',
-                fontSize: '12px',
+                position: 'relative',
               }}
             >
-              Lorem Ipsum
-            </Button>
-            <Button
-              variant="contained"
+              <StyledLogo src={Logo} alt="Logo" />
+            </Box>
+            <Box
               sx={{
-                textTransform: 'none',
-                fontSize: '12px',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-end',
+                gap: '8px',
+                py: '8px',
               }}
             >
-              Lorem Ipsum
-            </Button>
-            <Button
-              variant="contained"
-              sx={{
-                textTransform: 'none',
-                fontSize: '12px',
-              }}
-            >
-              Lorem Ipsum
-            </Button>
+              <Button
+                variant="text"
+                sx={{
+                  textTransform: 'none',
+                  fontSize: '12px',
+                }}
+              >
+                Lorem Ipsum
+              </Button>
+              <Button
+                variant="contained"
+                sx={{
+                  textTransform: 'none',
+                  fontSize: '12px',
+                }}
+              >
+                Lorem Ipsum
+              </Button>
+              <Button
+                variant="contained"
+                sx={{
+                  textTransform: 'none',
+                  fontSize: '12px',
+                }}
+              >
+                Lorem Ipsum
+              </Button>
+            </Box>
           </Box>
-        </Box>
-      </Container>
+        </Container>
+      )}
       <ThemeToggle />
     </Box>
   )
