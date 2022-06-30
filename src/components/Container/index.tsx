@@ -7,7 +7,7 @@ interface Props extends ContainerProps {
 
 const Container = ({ children, ...rest }: Props) => {
   return (
-    <MUIContainer maxWidth="lg" {...rest}>
+    <MUIContainer maxWidth="md" {...rest}>
       {children}
     </MUIContainer>
   )
