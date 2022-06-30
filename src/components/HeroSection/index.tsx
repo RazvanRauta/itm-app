@@ -1,17 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { type Theme } from '@mui/material'
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 import Paper from '@mui/material/Paper'
+import Skeleton from '@mui/material/Skeleton'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { memo } from 'react'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import Carousel from 'react-material-ui-carousel'
+
+import CardImage from '@/assets/images/cardImg.png'
 
 import Container from '../Container'
 
-const texts = ['Picture 1', 'Picture 2', 'Picture 3']
-
 export default memo(function HeroSection() {
+  const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'))
+
   return (
     <Box
       component="section"
@@ -39,73 +45,84 @@ export default memo(function HeroSection() {
           justifyContent: 'flex-end',
         }}
       >
-        <Toolbar
-          component="nav"
-          variant="dense"
-          sx={{
-            '&.MuiToolbar-dense': {
-              padding: 0,
-            },
-          }}
-        >
-          <Link color="white" underline="none" noWrap variant="h6" href="#" sx={{ p: 1 }}>
-            Link 1
-          </Link>
-          <Link color="white" underline="none" noWrap variant="h6" href="#" sx={{ p: 1 }}>
-            Link 2
-          </Link>
-          <Link color="white" noWrap variant="h6" underline="none" href="#" sx={{ p: 1 }}>
-            Link 3
-          </Link>
-        </Toolbar>
+        {!matches && (
+          <Toolbar
+            component="nav"
+            variant="dense"
+            sx={{
+              '&.MuiToolbar-dense': {
+                padding: 0,
+              },
+            }}
+          >
+            {[1, 2, 3].map((nr, i) => (
+              <Link
+                key={i}
+                color="white"
+                underline="none"
+                noWrap
+                variant="body1"
+                href="#"
+                sx={{ p: 1 }}
+              >
+                {`Link ${nr}`}
+              </Link>
+            ))}
+          </Toolbar>
+        )}
       </Container>
       <Container>
         <Box
           sx={{
             display: 'flex',
-            flexDirection: 'row',
+            flexDirection: matches ? 'column' : 'row',
             gap: '20px',
             alignItems: 'center',
             justifyContent: 'space-between',
           }}
         >
-          <Carousel
-            animation="fade"
-            navButtonsAlwaysVisible
-            autoPlay={false}
-            sx={{ flexGrow: 2, borderRadius: '10px' }}
-            indicatorContainerProps={{
-              style: { bottom: 10, zIndex: 10, position: 'absolute' },
-            }}
-          >
-            {texts.map((txt, i) => (
-              <Paper
-                key={`picture-${i}`}
-                elevation={10}
-                sx={{
-                  height: 350,
-                  backgroundColor: `#${Math.floor(Math.random() * 16777215).toString(
-                    16
-                  )}`,
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <h1>{txt}</h1>
-              </Paper>
-            ))}
-          </Carousel>
+          {!matches && (
+            <Carousel
+              animation="fade"
+              navButtonsAlwaysVisible
+              autoPlay={false}
+              sx={{ flexGrow: 2, borderRadius: '10px' }}
+              indicatorContainerProps={{
+                style: { bottom: 10, zIndex: 10, position: 'absolute' },
+              }}
+            >
+              {[0, 1, 2].map((txt, i) => (
+                <LazyLoadImage
+                  key={i}
+                  alt="Card Img"
+                  src={CardImage}
+                  width={576}
+                  height={250}
+                  style={{
+                    backgroundColor: 'lightgray',
+                    objectFit: 'cover',
+                  }}
+                  placeholder={
+                    <Skeleton
+                      sx={{ bgcolor: 'grey.500' }}
+                      variant="rectangular"
+                      width={576}
+                      height={250}
+                    />
+                  }
+                />
+              ))}
+            </Carousel>
+          )}
           <Box
             sx={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              height: 350,
+              height: 250,
               bgcolor: 'background.default',
-              width: '30%',
+              width: matches ? '100%' : '30%',
               p: '10px',
               gap: '10px',
               borderRadius: '10px',
@@ -122,10 +139,10 @@ export default memo(function HeroSection() {
                 padding: '10px 20px',
               }}
             >
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="body1" sx={{ fontWeight: 'bold' }} gutterBottom>
                 LOREM IPSUM LOREM
               </Typography>
-              <Typography variant="caption">
+              <Typography variant="caption" sx={{ fontSize: '9px', lineHeight: '12px' }}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua.
               </Typography>
@@ -141,10 +158,10 @@ export default memo(function HeroSection() {
                 padding: '10px 20px',
               }}
             >
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="body1" sx={{ fontWeight: 'bold' }} gutterBottom>
                 LOREM IPSUM LOREM
               </Typography>
-              <Typography variant="caption">
+              <Typography variant="caption" sx={{ fontSize: '9px', lineHeight: '12px' }}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua.
               </Typography>
