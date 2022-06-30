@@ -1,14 +1,13 @@
-import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
-import { ThemeProvider } from '@mui/material/styles'
 
-import theme from '@/theme'
+import Layout from '@/layout'
+import CustomThemeProvider from '@/providers/Theme'
 
 export default function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <CustomThemeProvider>
       <CssBaseline />
-      <Box>Hello</Box>
-    </ThemeProvider>
+      <Layout>Hello</Layout>
+    </CustomThemeProvider>
   )
 }
